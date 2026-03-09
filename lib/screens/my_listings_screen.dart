@@ -16,11 +16,11 @@ class MyListingsScreen extends ConsumerWidget {
     
     if (currentUser == null) {
       return const Scaffold(
-        backgroundColor: Color(0xFF1A1A2E),
+        backgroundColor: Color(0xFFF8F9FA),
         body: Center(
           child: Text(
             'Not logged in',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Color(0xFF212121)),
           ),
         ),
       );
@@ -29,14 +29,14 @@ class MyListingsScreen extends ConsumerWidget {
     final userListingsAsync = ref.watch(userListingsProvider(currentUser.uid));
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1A2E),
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           'My Listings',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF212121),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -51,13 +51,13 @@ class MyListingsScreen extends ConsumerWidget {
                   Icon(
                     Icons.inventory_2_outlined,
                     size: 64,
-                    color: Colors.white.withOpacity(0.3),
+                    color: Color(0xFF757575).withOpacity(0.5),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'No listings yet',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Color(0xFF757575),
                       fontSize: 18,
                     ),
                   ),
@@ -65,7 +65,7 @@ class MyListingsScreen extends ConsumerWidget {
                   Text(
                     'Tap + to create your first listing',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.4),
+                      color: Color(0xFF757575).withOpacity(0.7),
                       fontSize: 14,
                     ),
                   ),
@@ -91,7 +91,7 @@ class MyListingsScreen extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.edit, color: Color(0xFFFFC107)),
+                      icon: const Icon(Icons.edit, color: Color(0xFF2E7D32)),
                       onPressed: () {
                         _showListingForm(context, ref, listing: listing);
                       },
@@ -110,7 +110,7 @@ class MyListingsScreen extends ConsumerWidget {
         },
         loading: () => const Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFC107)),
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2E7D32)),
           ),
         ),
         error: (error, stack) => Center(
@@ -124,8 +124,8 @@ class MyListingsScreen extends ConsumerWidget {
         onPressed: () {
           _showListingForm(context, ref);
         },
-        backgroundColor: const Color(0xFFFFC107),
-        child: const Icon(Icons.add, color: Color(0xFF1A1A2E)),
+        backgroundColor: const Color(0xFFFF8F00),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -138,21 +138,21 @@ class MyListingsScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF2A2A3E),
+        backgroundColor: Colors.white,
         title: const Text(
           'Delete Listing',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color(0xFF212121)),
         ),
         content: Text(
           'Are you sure you want to delete "${listing.name}"?',
-          style: const TextStyle(color: Colors.white70),
+          style: const TextStyle(color: Color(0xFF757575)),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text(
               'Cancel',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(color: Color(0xFF757575)),
             ),
           ),
           TextButton(
@@ -312,18 +312,18 @@ class _ListingFormScreenState extends ConsumerState<_ListingFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1A2E),
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFFFFC107)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF2E7D32)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           widget.listing == null ? 'Create Listing' : 'Edit Listing',
           style: const TextStyle(
-            color: Colors.white,
+            color: Color(0xFF212121),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -351,17 +351,17 @@ class _ListingFormScreenState extends ConsumerState<_ListingFormScreen> {
               // Category dropdown
               DropdownButtonFormField<String>(
                 value: _selectedCategory,
-                dropdownColor: const Color(0xFF2A2A3E),
-                style: const TextStyle(color: Colors.white),
+                dropdownColor: Colors.white,
+                style: const TextStyle(color: Color(0xFF212121)),
                 decoration: InputDecoration(
                   labelText: 'Category',
-                  labelStyle: const TextStyle(color: Colors.white70),
-                  prefixIcon: const Icon(Icons.category, color: Color(0xFFFFC107)),
+                  labelStyle: const TextStyle(color: Color(0xFF757575)),
+                  prefixIcon: const Icon(Icons.category, color: Color(0xFF2E7D32)),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.1),
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
                   ),
                 ),
                 items: ListingModel.categories.map((category) {
@@ -463,8 +463,8 @@ class _ListingFormScreenState extends ConsumerState<_ListingFormScreen> {
               ElevatedButton(
                 onPressed: _isLoading ? null : _handleSubmit,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFFC107),
-                  foregroundColor: const Color(0xFF1A1A2E),
+                  backgroundColor: const Color(0xFFFF8F00),
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -476,7 +476,7 @@ class _ListingFormScreenState extends ConsumerState<_ListingFormScreen> {
                         width: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A1A2E)),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       )
                     : Text(
@@ -506,24 +506,24 @@ class _ListingFormScreenState extends ConsumerState<_ListingFormScreen> {
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Color(0xFF212121)),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.white70),
-        prefixIcon: Icon(icon, color: const Color(0xFFFFC107)),
+        labelStyle: const TextStyle(color: Color(0xFF757575)),
+        prefixIcon: Icon(icon, color: const Color(0xFF2E7D32)),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFFFC107), width: 2),
+          borderSide: const BorderSide(color: Color(0xFF2E7D32), width: 2),
         ),
       ),
       validator: validator,
