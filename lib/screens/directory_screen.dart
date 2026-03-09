@@ -15,14 +15,14 @@ class DirectoryScreen extends ConsumerWidget {
     final selectedCategory = ref.watch(selectedCategoryProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1A2E),
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           'Directory',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF212121),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -36,24 +36,24 @@ class DirectoryScreen extends ConsumerWidget {
               onChanged: (value) {
                 ref.read(searchQueryProvider.notifier).state = value;
               },
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Color(0xFF212121)),
               decoration: InputDecoration(
                 hintText: 'Search places...',
-                hintStyle: const TextStyle(color: Colors.white54),
-                prefixIcon: const Icon(Icons.search, color: Color(0xFFFFC107)),
+                hintStyle: const TextStyle(color: Color(0xFF757575)),
+                prefixIcon: const Icon(Icons.search, color: Color(0xFF2E7D32)),
                 suffixIcon: searchQuery.isNotEmpty
                     ? IconButton(
-                        icon: const Icon(Icons.clear, color: Colors.white54),
+                        icon: const Icon(Icons.clear, color: Color(0xFF757575)),
                         onPressed: () {
                           ref.read(searchQueryProvider.notifier).state = '';
                         },
                       )
                     : null,
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+                  borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
                 ),
               ),
             ),
@@ -98,13 +98,13 @@ class DirectoryScreen extends ConsumerWidget {
                         Icon(
                           Icons.search_off,
                           size: 64,
-                          color: Colors.white.withOpacity(0.3),
+                          color: Color(0xFF757575).withOpacity(0.5),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           'No listings found',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.5),
+                            color: Color(0xFF757575),
                             fontSize: 18,
                           ),
                         ),
@@ -153,13 +153,15 @@ class _CategoryChip extends StatelessWidget {
         label: Text(label),
         selected: isSelected,
         onSelected: (_) => onTap(),
-        backgroundColor: Colors.white.withOpacity(0.1),
-        selectedColor: const Color(0xFFFFC107),
+        backgroundColor: Colors.white,
+        selectedColor: const Color(0xFFE8F5E9),
         labelStyle: TextStyle(
-          color: isSelected ? const Color(0xFF1A1A2E) : Colors.white,
+          color: isSelected ? const Color(0xFF2E7D32) : Color(0xFF757575),
           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         ),
-        side: BorderSide.none,
+        side: isSelected 
+            ? const BorderSide(color: Color(0xFF2E7D32))
+            : const BorderSide(color: Color(0xFFE0E0E0)),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
     );
