@@ -14,10 +14,14 @@ final authStateProvider = StreamProvider<User?>((ref) {
   return authService.authStateChanges;
 });
 
-// Current user provider
+// Current user provider - watches auth state for real-time updates
 final currentUserProvider = Provider<User?>((ref) {
-  final authService = ref.watch(authServiceProvider);
-  return authService.currentUser;
+  final authState = ref.watch(authStateProvider);
+  return authState.when(
+    data: (user) => user,
+    loading: () => null,
+    error: (_, __) => null,
+  );
 });
 
 // User profile provider
@@ -67,6 +71,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
         email: email,
         password: password,
       );
+      // Force reload to get fresh user data
+      await _authService.reloadUser();
       state = AsyncValue.data(_authService.currentUser);
     } catch (e, stackTrace) {
       state = AsyncValue.error(e, stackTrace);
@@ -97,6 +103,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
   Future<void> reloadUser() async {
     try {
       await _authService.reloadUser();
+      // Update state with fresh user data
+      state = AsyncValue.data(_authService.currentUser);
     } catch (e) {
       rethrow;
     }
