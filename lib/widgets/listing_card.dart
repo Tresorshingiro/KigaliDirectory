@@ -34,34 +34,16 @@ class ListingCard extends StatelessWidget {
     }
   }
 
-  Color _getCategoryColor(String category) {
-    switch (category) {
-      case 'Hospital':
-        return Colors.red;
-      case 'Police Station':
-        return Colors.blue;
-      case 'Library':
-        return Colors.purple;
-      case 'Restaurant':
-        return Colors.orange;
-      case 'Café':
-        return Colors.brown;
-      case 'Park':
-        return Colors.green;
-      case 'Tourist Attraction':
-        return Colors.pink;
-      default:
-        return const Color(0xFFFFC107);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white.withOpacity(0.1),
+      color: Colors.white,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      elevation: 2,
+      shadowColor: Colors.black.withOpacity(0.1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Color(0xFFE0E0E0), width: 1),
       ),
       child: InkWell(
         onTap: onTap,
@@ -75,12 +57,12 @@ class ListingCard extends StatelessWidget {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: _getCategoryColor(listing.category).withOpacity(0.2),
+                  color: const Color(0xFFE8F5E9),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
                   _getCategoryIcon(listing.category),
-                  color: _getCategoryColor(listing.category),
+                  color: const Color(0xFF2E7D32),
                   size: 28,
                 ),
               ),
@@ -94,7 +76,7 @@ class ListingCard extends StatelessWidget {
                     Text(
                       listing.name,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Color(0xFF212121),
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -110,13 +92,13 @@ class ListingCard extends StatelessWidget {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFFC107).withOpacity(0.2),
+                            color: const Color(0xFFE8F5E9),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             listing.category,
                             style: const TextStyle(
-                              color: Color(0xFFFFC107),
+                              color: Color(0xFF2E7D32),
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -128,7 +110,7 @@ class ListingCard extends StatelessWidget {
                     Text(
                       listing.address,
                       style: const TextStyle(
-                        color: Colors.white70,
+                        color: Color(0xFF757575),
                         fontSize: 14,
                       ),
                       maxLines: 1,
@@ -144,7 +126,7 @@ class ListingCard extends StatelessWidget {
               else
                 const Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.white54,
+                  color: Color(0xFF757575),
                   size: 16,
                 ),
             ],
