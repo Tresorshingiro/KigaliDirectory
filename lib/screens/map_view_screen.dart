@@ -74,14 +74,14 @@ class _MapViewScreenState extends ConsumerState<MapViewScreen> {
     final allListingsAsync = ref.watch(allListingsProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1A2E),
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           'Map View',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF212121),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -98,13 +98,13 @@ class _MapViewScreenState extends ConsumerState<MapViewScreen> {
                   Icon(
                     Icons.map_outlined,
                     size: 64,
-                    color: Colors.white.withOpacity(0.3),
+                    color: Color(0xFF757575).withOpacity(0.5),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'No listings to display on map',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Color(0xFF757575),
                       fontSize: 18,
                     ),
                   ),
@@ -135,7 +135,7 @@ class _MapViewScreenState extends ConsumerState<MapViewScreen> {
         },
         loading: () => const Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFC107)),
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2E7D32)),
           ),
         ),
         error: (error, stack) => Center(
