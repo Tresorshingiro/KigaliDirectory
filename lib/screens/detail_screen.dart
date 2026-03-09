@@ -22,8 +22,10 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Future<void> _launchDirections() async {
+    // Use Google Maps URL that lets the app determine the starting point
+    // This works better across different platforms and emulators
     final url = Uri.parse(
-      'https://www.google.com/maps/dir/?api=1&destination=${widget.listing.latitude},${widget.listing.longitude}',
+      'https://www.google.com/maps/dir/?api=1&destination=${widget.listing.latitude},${widget.listing.longitude}&travelmode=driving',
     );
 
     if (await canLaunchUrl(url)) {
@@ -58,18 +60,18 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1A2E),
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFFFFC107)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF2E7D32)),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
           'Details',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF212121),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -84,7 +86,14 @@ class _DetailScreenState extends State<DetailScreen> {
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.white.withOpacity(0.2)),
+                border: Border.all(color: Color(0xFFE0E0E0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               clipBehavior: Clip.antiAlias,
               child: GoogleMap(
@@ -115,8 +124,15 @@ class _DetailScreenState extends State<DetailScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +141,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   Text(
                     widget.listing.name,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF212121),
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -139,13 +155,13 @@ class _DetailScreenState extends State<DetailScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFC107).withOpacity(0.2),
+                      color: const Color(0xFFE8F5E9),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       widget.listing.category,
                       style: const TextStyle(
-                        color: Color(0xFFFFC107),
+                        color: Color(0xFF2E7D32),
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -188,8 +204,8 @@ class _DetailScreenState extends State<DetailScreen> {
               child: ElevatedButton.icon(
                 onPressed: _launchDirections,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFFC107),
-                  foregroundColor: const Color(0xFF1A1A2E),
+                  backgroundColor: const Color(0xFFFF8F00),
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -235,7 +251,7 @@ class _DetailRow extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: const Color(0xFFFFC107),
+          color: const Color(0xFF2E7D32),
           size: 24,
         ),
         const SizedBox(width: 12),
@@ -246,7 +262,7 @@ class _DetailRow extends StatelessWidget {
               Text(
                 label,
                 style: const TextStyle(
-                  color: Colors.white70,
+                  color: Color(0xFF757575),
                   fontSize: 14,
                 ),
               ),
@@ -254,7 +270,7 @@ class _DetailRow extends StatelessWidget {
               Text(
                 value,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF212121),
                   fontSize: 16,
                 ),
               ),
@@ -264,7 +280,7 @@ class _DetailRow extends StatelessWidget {
         if (onTap != null)
           const Icon(
             Icons.open_in_new,
-            color: Color(0xFFFFC107),
+            color: Color(0xFF2E7D32),
             size: 20,
           ),
       ],
