@@ -13,11 +13,11 @@ class SettingsScreen extends ConsumerWidget {
 
     if (currentUser == null) {
       return const Scaffold(
-        backgroundColor: Color(0xFF1A1A2E),
+        backgroundColor: Color(0xFFF8F9FA),
         body: Center(
           child: Text(
             'Not logged in',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Color(0xFF212121)),
           ),
         ),
       );
@@ -26,14 +26,14 @@ class SettingsScreen extends ConsumerWidget {
     final userProfileAsync = ref.watch(userProfileProvider(currentUser.uid));
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A1A2E),
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           'Settings',
           style: TextStyle(
-            color: Colors.white,
+            color: Color(0xFF212121),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -47,18 +47,50 @@ class SettingsScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Column(
                 children: [
                   const CircleAvatar(
                     radius: 40,
-                    backgroundColor: Color(0xFFFFC107),
+                    backgroundColor: Color(0xFF2E7D32),
                     child: Icon(
                       Icons.person,
                       size: 40,
-                      color: Color(0xFF1A1A2E),
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Show currently authenticated email prominently
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF2E7D32).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Color(0xFF2E7D32), width: 1),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.verified_user, color: Color(0xFF2E7D32), size: 16),
+                        SizedBox(width: 8),
+                        Text(
+                          'Logged in as: ${currentUser.email}',
+                          style: TextStyle(
+                            color: Color(0xFF2E7D32),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -67,7 +99,7 @@ class SettingsScreen extends ConsumerWidget {
                       if (profile == null) {
                         return const Text(
                           'Profile not found',
-                          style: TextStyle(color: Colors.white70),
+                          style: TextStyle(color: Color(0xFF757575)),
                         );
                       }
                       return Column(
@@ -75,7 +107,7 @@ class SettingsScreen extends ConsumerWidget {
                           Text(
                             profile.displayName,
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: Color(0xFF212121),
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
@@ -84,7 +116,7 @@ class SettingsScreen extends ConsumerWidget {
                           Text(
                             profile.email,
                             style: const TextStyle(
-                              color: Colors.white70,
+                              color: Color(0xFF757575),
                               fontSize: 16,
                             ),
                           ),
@@ -92,7 +124,7 @@ class SettingsScreen extends ConsumerWidget {
                       );
                     },
                     loading: () => const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFC107)),
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2E7D32)),
                     ),
                     error: (error, stack) => Text(
                       'Error loading profile',
@@ -109,8 +141,15 @@ class SettingsScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Column(
                 children: [
@@ -141,7 +180,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
 
-                  const Divider(color: Colors.white24, height: 1),
+                  const Divider(color: Color(0xFFE0E0E0), height: 1),
 
                   // Location notifications toggle
                   _SettingsItem(
@@ -165,11 +204,11 @@ class SettingsScreen extends ConsumerWidget {
                           ),
                         );
                       },
-                      activeColor: const Color(0xFFFFC107),
+                      activeColor: const Color(0xFFFF8F00),
                     ),
                   ),
 
-                  const Divider(color: Colors.white24, height: 1),
+                  const Divider(color: Color(0xFFE0E0E0), height: 1),
 
                   // App version
                   const _SettingsItem(
@@ -189,21 +228,21 @@ class SettingsScreen extends ConsumerWidget {
                 final confirmed = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
-                    backgroundColor: const Color(0xFF2A2A3E),
+                    backgroundColor: Colors.white,
                     title: const Text(
                       'Logout',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Color(0xFF212121)),
                     ),
                     content: const Text(
                       'Are you sure you want to logout?',
-                      style: TextStyle(color: Colors.white70),
+                      style: TextStyle(color: Color(0xFF757575)),
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(false),
                         child: const Text(
                           'Cancel',
-                          style: TextStyle(color: Colors.white70),
+                          style: TextStyle(color: Color(0xFF757575)),
                         ),
                       ),
                       TextButton(
@@ -218,7 +257,12 @@ class SettingsScreen extends ConsumerWidget {
                 );
 
                 if (confirmed == true) {
+                  // Sign out and invalidate all providers to clear cached state
                   await ref.read(authNotifierProvider.notifier).signOut();
+                  ref.invalidate(authStateProvider);
+                  ref.invalidate(currentUserProvider);
+                  ref.invalidate(allListingsProvider);
+                  ref.invalidate(userListingsProvider);
                 }
               },
               style: ElevatedButton.styleFrom(
@@ -265,19 +309,19 @@ class _SettingsItem extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: const Color(0xFFFFC107),
+        color: const Color(0xFF2E7D32),
       ),
       title: Text(
         title,
         style: const TextStyle(
-          color: Colors.white,
+          color: Color(0xFF212121),
           fontWeight: FontWeight.w600,
         ),
       ),
       subtitle: Text(
         subtitle,
         style: const TextStyle(
-          color: Colors.white70,
+          color: Color(0xFF757575),
           fontSize: 14,
         ),
       ),
