@@ -62,7 +62,9 @@ class AuthService {
 
       // Check if email is verified
       if (userCredential.user != null && !userCredential.user!.emailVerified) {
-        throw Exception('Please verify your email before logging in. Check your inbox.');
+        // Sign them out immediately
+        await _auth.signOut();
+        throw Exception('Please verify your email first. Check your inbox for the verification link, click it, then try logging in again.');
       }
 
       return userCredential;
