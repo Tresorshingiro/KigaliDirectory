@@ -284,4 +284,4 @@ This project is created for educational purposes.
 
 ## Author
 
-Built with ❤️ using Flutter and Firebase
+
